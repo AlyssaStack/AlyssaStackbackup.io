@@ -1,10 +1,11 @@
-.box {
+.bio_container {
   border-style: solid;
   border-color: black;
   border-width: 2px;
   padding: 10px 10px 10px 10px;
   width: 320px;
   font-weight: 300;
+  float: left;
 }
 
 .newstitle {
@@ -12,14 +13,37 @@
   margin-bottom: 10px;
   padding: 10px 20px 10px 20px;
   text-align: center;
+  width: 50%;
 }
 
 .newssite {
   float: left;
+  text-align: center;
   margin-right: 10px;
   margin-bottom: 10px;
   background-color: #84A5E5;
   padding: 10px 20px 10px 20px;
+}
+
+.clear {
+  clear: left;
+}
+
+.name_container {
+
+}
+
+.image_container {
+  background-color: black;
+  height: 400px;
+  width: 400px;
+  border-radius: 50%;
+  float: left;
+  overflow: hidden;
+}
+
+.news_container {
+
 }
 
 .clear {
