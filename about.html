@@ -5,39 +5,44 @@
     <title>About Me</title>
       <link rel="stylesheet" href="site.css">
         <script>
+
           window.onload = function() {
+            // functions that run after page loads
             displayGreeting();
-            fetchWeather(85719);
+            fetchWeather();
           }
+         // display good morning, afternoon or evening based on the time
           function displayGreeting() {
-            var date = new date();
+            var date = new Date();
             var hour = date.getHours();
             var description = "";
-            if (hour < 12 ) {
-              description = "Morning";
+            if (hour < 12) {
+               description = "Morning";
           } else if (hour < 17) {
-              description = "Afternoon";
+               description = "Afternoon";
           } else {
-              description = "Evening";
+               description = "Evening";
           }
-          document.getElementById("greeting").innerHTML = "Good" +
-            description;
+          document.getElementById("greeting").innerHTML = "Good " + description;
           }
+           // get weather data from openweathermap and display the current temp
           function fetchWeather() {
             fetch("https://api.openweathermap.org/data/2.5/weather?zip=85719,US&appid=7b450bb44a0b53cc10aa1c0ccfad64e3&units=imperial")
             .then(function(resp) { return resp.json() })
             .then(function(data) {
-          document.getElementById("weather").innerHTML = "It is currently" + data.main.temp + "&deg; in Tucson, AZ";
+          document.getElementById("weather").innerHTML = "It is currently " + data.main.temp + "&#8457 in Tucson, AZ";
           })
           .catch(function() {
           document.getElementById("weather").innerHTML = "Error in fetchWeather function";
           });
         }
+
         </script>
 </head>
 <body>
     <div id="greeting"></div>
     <div id="weather"></div>
+    <div id="It is currently" + data.main.temp + "in Tucson, AZ"></div>
   <center>
     <div class="name_container">
         <h2>Alyssa Stack</h2>
