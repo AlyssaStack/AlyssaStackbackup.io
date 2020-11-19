@@ -5,10 +5,11 @@
     <title>About Me</title>
       <link rel="stylesheet" href="site.css">
         <script>
-          window.onload = function(){
+          window.onload = function() {
             displayGreeting();
+            fetchWeather(85719);
           }
-          function displayGreeting(){
+          function displayGreeting() {
             var date = new date();
             var hour = date.getHours();
             var description = "";
@@ -19,18 +20,17 @@
           } else {
               description = "Evening";
           }
-          document.getElementById("greeting").innerHTML = "good" +
+          document.getElementById("greeting").innerHTML = "Good" +
             description;
           }
           function fetchWeather() {
-            fetch("https://api.openweathermap.org/data/2.5/weather?zip=85719,US&appid=7b450bb44a0b53cc10aa1c0ccfad64e3&units=")
+            fetch("https://api.openweathermap.org/data/2.5/weather?zip=85719,US&appid=7b450bb44a0b53cc10aa1c0ccfad64e3&units=imperial")
             .then(function(resp) { return resp.json() })
             .then(function(data) {
-              document.getElementById('weather').innerHTML =
-              data.main.temp;
+          document.getElementById("weather").innerHTML = "It is currently" + data.main.temp + "&deg; in Tucson, AZ";
           })
           .catch(function() {
-            document.getElementById('waether').innerHTML = "Error in fetchWeather function";
+          document.getElementById("weather").innerHTML = "Error in fetchWeather function";
           });
         }
         </script>
