@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
-<link rel="stylesheet" href="site.css">
+      <link rel="stylesheet" href="site.css">
+        <script>
+          window.onload = function(){
+            displayGreeting();
+          }
+          function displayGreeting(){
+            var date = new date();
+            var hour = date.getHours();
+            var description = "";
+            if (hour < 12 ) {
+              description = "Morning";
+          } else if (hour < 17) {
+              description = "Afternoon";
+          } else {
+              description = "Evening";
+          }
+          document.getElementById("greeting").innerHTML = "good" +
+            description;
+          }
+          function fetchWeather() {
+            fetch("https://api.openweathermap.org/data/2.5/weather?zip=85719,US&appid=7b450bb44a0b53cc10aa1c0ccfad64e3&units=")
+            .then(function(resp) { return resp.json() })
+            .then(function(data) {
+              document.getElementById('weather').innerHTML =
+              data.main.temp;
+          })
+          .catch(function() {
+            document.getElementById('waether').innerHTML = "Error in fetchWeather function";
+          });
+        }
+        </script>
 </head>
 <body>
+    <div id="greeting"></div>
+    <div id="weather"></div>
   <center>
     <div class="name_container">
         <h2>Alyssa Stack</h2>
@@ -14,11 +46,13 @@
         <img src="Media/flagstaff.jpeg">
     </div>
     <div class="bio_container">
-        <p>My name is Alyssa Stack and I am a junior at the University of Arizona. My major is Journalism and my minor is Criminology. My dream job is to become an editor for a major newspaper.</p>
+        <p>My name is Alyssa Stack and I am a junior at the University of Arizona. My major is Journalism and my minor is Criminology. My dream job is to become an editor for a major newspaper, hopefully at the Arizona Daily Sun in Flagstaff, Arizona, my hometown. I enjoy drawing, painting, hot yoga, hiking, and going out downtown with friends. I spend a lot of time with my kitten, Simon.</p>
     </div>
   </center>
   <div class="news_container">
-  <div class="newstitle">News Sites</div>
+  <div class="newstitle">
+        <h2>News Sites</h2>
+    </div>
   <div class="newssite"><a href="https://www.npr.org/" target="_blank">NPR</a></div>
   <div class="newssite"><a href="https://www.nytimes.com/" target="_blank">NY Times</a></div>
   <div class="newssite"><a href="https://www.washingtonpost.com/" target="_blank">Washington Post</a></div>
