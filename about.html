@@ -11,59 +11,33 @@
         displayGreeting();
         fetchWeather();
         displayRSSFeed ();
-      }
-      function displayRSSFeed() {
-      // fetch an RSS feed and display the title and description
-      var origURL = 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml';
-      // feednami doesn't like & so replace with %26
-      var replacedURL = origURL.replace(/&/g, "%26");
-      feednami.load(replacedURL,function(result) {
-        if (result.error) {
-          console.log(result.error);
-        } else {
-          var entries = result.feed.entries
-          for (var i = 0; i < entries.length; i++) {
-            var entry = entries[i];
-            let divElement = '<div class="rss_title"><a href=' + entry.link + '" target="_blank">' + entry.title + '</a></div><div class="rss_description">' + entry.description + '</div>';
-            document.getElementById("rss_items").innerHTML += divElement;
-          }
-        }
-      });
-    }
-      </script>
-      <script>
-         // display good morning, afternoon or evening based on the time
-          function displayGreeting() {
-            var date = new Date();
-            var hour = date.getHours();
-            var description = "";
-            if (hour < 12) {
-               description = "Morning";
-          } else if (hour < 17) {
-               description = "Afternoon";
-          } else {
-               description = "Evening";
-          }
-          document.getElementById("greeting").innerHTML = "Good " + description;
-          }
-           // get weather data from openweathermap and display the current temp
-          function fetchWeather() {
-            fetch("https://api.openweathermap.org/data/2.5/weather?zip=85719,US&appid=7b450bb44a0b53cc10aa1c0ccfad64e3&units=imperial")
-            .then(function(resp) { return resp.json() })
-            .then(function(data) {
-          document.getElementById("weather").innerHTML = "It is currently " + data.main.temp + "&#8457 in Tucson, AZ";
-          })
-          .catch(function() {
-          document.getElementById("weather").innerHTML = "Error in fetchWeather function";
-          });
-        }
-        </script>
+        listSheet ();
+        {
+          function drawMap() {
+    // draw a map using leafletjs and tiles from mapbox
+    var mymap = L.map('mapid').setView([32.221041, -110.971143], 15);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'ACCESS_TOKEN_HERE'
+    }).addTo(mymap);
+    return mymap;
+  }
+  function addPin(mymap, lat, lon, name) {
+  // add a pin to mymap at lat, lon with a popup
+  L.marker([lat, lon]).addTo(mymap).bindPopup(name);
+}
 </head>
 <body>
     <div id="greeting"></div>
     <div id="weather"></div>
     <div id="It is currently" + data.main.temp + "in Tucson, AZ"></div>
     <div id="rss_items"></div>
+    <h2>COVID-19 Testing Locations</h2>
+    <div id="sheet"></div>
   <center>
     <div class="name_container">
         <h2>Alyssa Stack</h2>
